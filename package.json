@@ -1,0 +1,30 @@
+{
+  "name": "how-many-soccer-do-you-know",
+  "version": "1.0.0",
+  "description": "a game for soccer fans",
+  "main": "index.js",
+  "scripts": {
+    "public": "mkdir -p public",
+    "build-js": "NODE_PATH=. browserify -t [ babelify --presets [ es2015 ] ] src/index.js > public/app.js",
+    "copy-files": "cp src/index.html public/index.html",
+    "build": "npm run public && npm run build-js && npm run copy-files",
+    "serve": "serve public"
+  },
+  "keywords": [
+    "soccer",
+    "guess"
+  ],
+  "author": "aguvilte",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "page": "^1.8.3",
+    "serve": "^6.4.9"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^15.0.0"
+  }
+}
