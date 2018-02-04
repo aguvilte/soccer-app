@@ -6,7 +6,7 @@
   "scripts": {
     "public": "mkdir -p public",
     "build-js": "NODE_PATH=. browserify -t [ babelify --presets [ es2015 ] ] src/index.js > public/app.js",
-    "copy-files": "cp src/index.html public/index.html",
+    "copy-files": "cp src/index.html public/index.html && cp src/styles.css public/styles.css",
     "build": "npm run public && npm run build-js && npm run copy-files",
     "serve": "serve public"
   },
@@ -17,8 +17,13 @@
   "author": "aguvilte",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "express": "^4.16.2",
     "jquery": "^3.3.1",
     "page": "^1.8.3",
+    "pg": "^6.1.0",
+    "pg-native": "^2.2.0",
+    "pg-promise": "^6.2.3",
     "serve": "^6.4.9"
   },
   "devDependencies": {
