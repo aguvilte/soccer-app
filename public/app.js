@@ -11697,18 +11697,11 @@ var _private2 = _interopRequireDefault(_private);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import dbconfig from 'src/private/config.js';
-
 var $itemsContainer = (0, _jquery2.default)('#app-body').find('.items');
 var itemTemplate = '<article class="item col-3">\n                        <p>:name:</p>\n                    </article>';
 
-var dbconfig = {
-    host: 'localhost',
-    port: 5432,
-    database: 'soccer-api',
-    user: 'aguchix',
-    password: 'matriceisi318'
-};
+var $questionContainer = (0, _jquery2.default)('#app-body').find('.question');
+var questionTemplate = '<h2>\xBFCu\xE1l equipo pertenece al torneo :competition:?</h2>';
 
 var competitions = {
     id: [],
@@ -11721,16 +11714,19 @@ var teams = {
     name: []
 };
 
+var teamChoose;
+var idCompetitionChoose;
+var nameCompetitionChoose;
+var indexCompetition;
+var indexTeam;
+
 function getItems(returnItems) {
-    // export function getItems(returnItems) {
     _jquery2.default.ajax({
         headers: { 'X-Auth-Token': _private2.default },
         url: 'http://api.football-data.org/v1/competitions/',
         dataType: 'json',
-        // async: false,
         type: 'GET',
         success: function success(data) {
-            // returnItems(data)
             for (var i = 0; i < data.length; i++) {
                 if (data[i].id != 466) {
                     competitions.id[i] = data[i].id;
@@ -11738,79 +11734,46 @@ function getItems(returnItems) {
                 }
             }
 
-            console.log(competitions);
-
             for (var l = 0; l < 4; l++) {
                 teams.idCompetition.push(competitions.id[Math.floor(Math.random() * competitions.id.length)]);
-                // teams.idCompetition.unshift(competitions.id[Math.floor(Math.random()*competitions.id.length)]);
                 var urlString = 'http://api.football-data.org/v1/competitions/' + teams.idCompetition[l] + '/teams';
-                // console.log('asd ' + teams.idCompetition[l])
-                // console.log(url)
-
 
                 _jquery2.default.ajax({
                     headers: { 'X-Auth-Token': _private2.default },
-                    // url: 'http://api.football-data.org/v1/competitions/' + teams.idCompetition[l] + '/teams',
                     url: urlString,
                     dataType: 'json',
                     type: 'GET',
                     success: function success(data) {
-                        console.log(data);
-
                         teams.name.push(data.teams[Math.floor(Math.random() * data.teams.length)].name);
-                        // teams.name.unshift('juancho')
-                        // console.log(teams)
-                        console.log('length of teams.name: ' + teams.name.length);
                     }
                 });
             }
-            // for (var concha = 0; concha < 4; concha++)
-            //     console.log('cuando id competition = ' + teams.idCompetition[concha] + ', el random team es ' + teams.name[concha])
-
-            // console.log(competitions)    
-            console.log(teams);
-
-            // },
-            // complete: (data) => {
-            //     for (var i = 0; i < 4; i++) {
-            //         var stringToReplace = teams.idCompetition[i] + ' - ' + teams.name[i]
-            //         // console.log('la concha de la lora, loco')
-            //         // console.log(JSON.stringify(items))
-            //         // console.log(stringToReplace)
-            //         // console.log(items)
-            //         // var itemArticle = itemTemplate.replace(':name:', items[i].caption);
-            //         var itemArticle = itemTemplate.replace(':name:', stringToReplace);
-
-            //         var $itemArticle = $(itemArticle);
-            //         $itemsContainer.append($itemArticle)
-
-            //         // competitionsObj.id[i] = items[i].id;
-            //         // competitionsObj.name[i] = items[i].caption;
-            //     }
         }
 
     });
 
     returnItems(teams);
-    // return teams;
 }
 
 setTimeout(function () {
     for (var i = 0; i < 4; i++) {
-        var stringToReplace = teams.idCompetition[i] + ' - ' + teams.name[i];
-        // console.log('la concha de la lora, loco')
-        // console.log(JSON.stringify(items))
-        // console.log(stringToReplace)
-        // console.log(items)
-        // var itemArticle = itemTemplate.replace(':name:', items[i].caption);
+        var stringToReplace = teams.name[i];
+
         var itemArticle = itemTemplate.replace(':name:', stringToReplace);
 
         var $itemArticle = (0, _jquery2.default)(itemArticle);
         $itemsContainer.append($itemArticle);
-
-        // competitionsObj.id[i] = items[i].id;
-        // competitionsObj.name[i] = items[i].caption;
     }
+
+    teamChoose = teams.name[Math.floor(Math.random() * teams.name.length)];
+    indexTeam = teams.name.indexOf(teamChoose);
+    idCompetitionChoose = teams.idCompetition[indexTeam];
+    indexCompetition = competitions.id.indexOf(idCompetitionChoose);
+    nameCompetitionChoose = competitions.name[indexCompetition];
+
+    var question = questionTemplate.replace(':competition:', nameCompetitionChoose);
+    var $question = (0, _jquery2.default)(question);
+    $questionContainer.append($question);
 }, 10000);
 
 },{"jquery":2,"src/private":8}],7:[function(require,module,exports){
@@ -11826,19 +11789,12 @@ var _api = require('src/api');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const pg = require('pg')
-
 (0, _page2.default)('/', index);
 
 function index(ctx) {
     (0, _api.getItems)(function (items) {
-        // console.log('viejo: ' + getItems(items))
-        console.log('hey');
         // renderItems(items);
     });
-    // var items = getItems()
-    // renderItems(items)
-    console.log('salió por acá pero no hizo un pingo');
 }
 
 (0, _page2.default)();
@@ -11873,32 +11829,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var $itemsContainer = (0, _jquery2.default)('#app-body').find('.items');
 var itemTemplate = '<article class="item col-3">\n                        <p>:name:</p>\n                    </article>';
 
-// var competitionsObj = [];
-
 function renderItems(items) {
-    // for(var property in items) {
-    //     alert(property + "=" + items[property]);
-    // }
-    console.log('items: ---------');
-    console.log(items);
-
-    // for (var i = 0; i < items.length; i++) {
     for (var i = 0; i < 4; i++) {
         var stringToReplace = items.idCompetition[i] + ' - ' + items.name[i];
-        // console.log('la concha de la lora, loco')
+
         console.log(JSON.stringify(items));
         console.log(stringToReplace);
-        // console.log(items)
-        // var itemArticle = itemTemplate.replace(':name:', items[i].caption);
+
         var itemArticle = itemTemplate.replace(':name:', stringToReplace);
 
         var $itemArticle = (0, _jquery2.default)(itemArticle);
         $itemsContainer.append($itemArticle);
-
-        // competitionsObj.id[i] = items[i].id;
-        // competitionsObj.name[i] = items[i].caption;
     }
-    // localStorage.competitions = ;
 }
 
 },{"jquery":2}]},{},[7]);
