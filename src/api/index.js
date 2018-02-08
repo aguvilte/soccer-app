@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import apiKey from 'src/private';
 
-const $itemsContainer = $('#app-body').find('.items');
+var $itemsContainer = $('#app-body').find('.items');
 var itemTemplate = `<article class="item col-3">
                         <p>:name:</p>
                     </article>`;
@@ -80,4 +80,29 @@ setTimeout(function() {
     var question = questionTemplate.replace(':competition:', nameCompetitionChoose);
     var $question = $(question);
     $questionContainer.append($question)
+
+    var item = $('.items').children();
+
+    for (var i = 0; i < item.length; i++) {
+        var $item = $(item[i]);
+        var j = i + 1;
+        $item.addClass('item-' + j)
+    }
+
+    $('.item-1').click(() => {
+        $('.item-1').css('background-color', 'red')
+    });
+
+    $('.item-2').click(() => {
+        $('.item-2').css('background-color', 'red')
+    });
+
+    $('.item-3').click(() => {
+        $('.item-3').css('background-color', 'red')
+    });
+
+    $('.item-4').click(() => {
+        $('.item-4').css('background-color', 'red')
+    });
+
 }, 10000);

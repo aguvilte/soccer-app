@@ -1,3 +1,7 @@
 article.item {
     border: 2px solid black;
 }
+
+article.item:hover {
+    cursor: pointer;
+}

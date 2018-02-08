@@ -11774,6 +11774,30 @@ setTimeout(function () {
     var question = questionTemplate.replace(':competition:', nameCompetitionChoose);
     var $question = (0, _jquery2.default)(question);
     $questionContainer.append($question);
+
+    var item = (0, _jquery2.default)('.items').children();
+
+    for (var i = 0; i < item.length; i++) {
+        var $item = (0, _jquery2.default)(item[i]);
+        var j = i + 1;
+        $item.addClass('item-' + j);
+    }
+
+    (0, _jquery2.default)('.item-1').click(function () {
+        (0, _jquery2.default)('.item-1').css('background-color', 'red');
+    });
+
+    (0, _jquery2.default)('.item-2').click(function () {
+        (0, _jquery2.default)('.item-2').css('background-color', 'red');
+    });
+
+    (0, _jquery2.default)('.item-3').click(function () {
+        (0, _jquery2.default)('.item-3').css('background-color', 'red');
+    });
+
+    (0, _jquery2.default)('.item-4').click(function () {
+        (0, _jquery2.default)('.item-4').css('background-color', 'red');
+    });
 }, 10000);
 
 },{"jquery":2,"src/private":8}],7:[function(require,module,exports){
