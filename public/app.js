@@ -11720,6 +11720,8 @@ var nameCompetitionChoose;
 var indexCompetition;
 var indexTeam;
 
+var indexChoose;
+
 function getItems(returnItems) {
     _jquery2.default.ajax({
         headers: { 'X-Auth-Token': _private2.default },
@@ -11771,6 +11773,12 @@ setTimeout(function () {
     indexCompetition = competitions.id.indexOf(idCompetitionChoose);
     nameCompetitionChoose = competitions.name[indexCompetition];
 
+    console.log('teamChoose: ' + teamChoose);
+    console.log('indexTeam: ' + indexTeam);
+    console.log('idCompetitionChoose: ' + idCompetitionChoose);
+    console.log('indexCompetition: ' + indexCompetition);
+    console.log('nameCompetitionChoose: ' + nameCompetitionChoose);
+
     var question = questionTemplate.replace(':competition:', nameCompetitionChoose);
     var $question = (0, _jquery2.default)(question);
     $questionContainer.append($question);
@@ -11784,19 +11792,35 @@ setTimeout(function () {
     }
 
     (0, _jquery2.default)('.item-1').click(function () {
-        (0, _jquery2.default)('.item-1').css('background-color', 'red');
+        indexChoose = 0;
+        if (indexChoose == indexTeam) (0, _jquery2.default)('.item-1').css('background-color', 'green');else (0, _jquery2.default)('.item-1').css('background-color', 'red');
+        setTimeout(function () {
+            location.reload();
+        }, 2000);
     });
 
     (0, _jquery2.default)('.item-2').click(function () {
-        (0, _jquery2.default)('.item-2').css('background-color', 'red');
+        indexChoose = 1;
+        if (indexChoose == indexTeam) (0, _jquery2.default)('.item-2').css('background-color', 'green');else (0, _jquery2.default)('.item-2').css('background-color', 'red');
+        setTimeout(function () {
+            location.reload();
+        }, 2000);
     });
 
     (0, _jquery2.default)('.item-3').click(function () {
-        (0, _jquery2.default)('.item-3').css('background-color', 'red');
+        indexChoose = 2;
+        if (indexChoose == indexTeam) (0, _jquery2.default)('.item-3').css('background-color', 'green');else (0, _jquery2.default)('.item-3').css('background-color', 'red');
+        setTimeout(function () {
+            location.reload();
+        }, 2000);
     });
 
     (0, _jquery2.default)('.item-4').click(function () {
-        (0, _jquery2.default)('.item-4').css('background-color', 'red');
+        indexChoose = 3;
+        if (indexChoose == indexTeam) (0, _jquery2.default)('.item-4').css('background-color', 'green');else (0, _jquery2.default)('.item-4').css('background-color', 'red');
+        setTimeout(function () {
+            location.reload();
+        }, 2000);
     });
 }, 10000);
 

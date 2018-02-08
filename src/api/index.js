@@ -26,6 +26,8 @@ var nameCompetitionChoose;
 var indexCompetition;
 var indexTeam;
 
+var indexChoose;
+
 export function getItems(returnItems) {
     $.ajax({
         headers: { 'X-Auth-Token': apiKey },
@@ -77,6 +79,12 @@ setTimeout(function() {
     indexCompetition = competitions.id.indexOf(idCompetitionChoose)
     nameCompetitionChoose = competitions.name[indexCompetition]
 
+    // console.log('teamChoose: ' + teamChoose)
+    // console.log('indexTeam: ' + indexTeam)
+    // console.log('idCompetitionChoose: ' + idCompetitionChoose)
+    // console.log('indexCompetition: ' + indexCompetition)
+    // console.log('nameCompetitionChoose: ' + nameCompetitionChoose)
+    
     var question = questionTemplate.replace(':competition:', nameCompetitionChoose);
     var $question = $(question);
     $questionContainer.append($question)
@@ -90,19 +98,39 @@ setTimeout(function() {
     }
 
     $('.item-1').click(() => {
-        $('.item-1').css('background-color', 'red')
+        indexChoose = 0;
+        if (indexChoose == indexTeam)
+            $('.item-1').css('background-color', 'green')
+        else
+            $('.item-1').css('background-color', 'red')
+        setTimeout(() => { location.reload() }, 2000)
     });
 
     $('.item-2').click(() => {
-        $('.item-2').css('background-color', 'red')
+        indexChoose = 1;
+        if (indexChoose == indexTeam)
+            $('.item-2').css('background-color', 'green')
+        else
+            $('.item-2').css('background-color', 'red')
+        setTimeout(() => { location.reload() }, 2000)
     });
 
     $('.item-3').click(() => {
-        $('.item-3').css('background-color', 'red')
+        indexChoose = 2;
+        if (indexChoose == indexTeam)
+            $('.item-3').css('background-color', 'green')
+        else
+            $('.item-3').css('background-color', 'red')
+        setTimeout(() => { location.reload() }, 2000)
     });
 
     $('.item-4').click(() => {
-        $('.item-4').css('background-color', 'red')
+        indexChoose = 3;
+        if (indexChoose == indexTeam)
+            $('.item-4').css('background-color', 'green')
+        else
+            $('.item-4').css('background-color', 'red')
+        setTimeout(() => { location.reload() }, 2000)
     });
 
 }, 10000);
